@@ -3,7 +3,7 @@
   "routes": [
     {
       "src": "/",
-      "dest": "/index.html"
+      "dest": "/pages/index.html"
     },
     {
       "src": "/admin",
@@ -11,7 +11,7 @@
     },
     {
       "src": "/(.*)",
-      "dest": "/$1.html"
+      "dest": "/pages/$1.html"
     }
   ]
 }
