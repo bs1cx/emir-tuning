@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Favorilerim - Emir Tuning Garage</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/wishlist.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+</head>
+<body>
+    <div id="header"></div>
+    
+    <main class="wishlist-page">
+        <div class="container" style="padding-top: 100px;">
+            <div class="page-header">
+                <h1 class="section__title">FAVORLERM</h1>
+                <p class="page-subtitle">Beendiiniz ürünleri burada saklayn</p>
+            </div>
+
+            <!-- Favori statistikleri -->
+            <div class="wishlist-stats">
+                <div class="stat-item">
+                    <span class="stat-number" id="totalWishlist">0</span>
+                    <span class="stat-label">Toplam Favori</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" id="inStockCount">0</span>
+                    <span class="stat-label">Stokta Olanlar</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" id="outOfStockCount">0</span>
+                    <span class="stat-label">Stokta Olmayanlar</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" id="totalValue">0</span>
+                    <span class="stat-label">Toplam Deer</span>
+                </div>
+            </div>
+
+            <!-- Filtreleme -->
+            <div class="wishlist-filters">
+                <div class="filter-group">
+                    <label>Stok Durumu</label>
+                    <select id="stockFilter" class="filter-select">
+                        <option value="">Tümü</option>
+                        <option value="inStock">Stokta</option>
+                        <option value="outOfStock">Stokta Yok</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label>Sralama</label>
+                    <select id="sortFilter" class="filter-select">
+                        <option value="date">Eklenme Tarihi</option>
+                        <option value="price-low">Fiyat (Artan)</option>
+                        <option value="price-high">Fiyat (Azalan)</option>
+                        <option value="name">sim (A-Z)</option>
+                    </select>
+                </div>
+                <div class="filter-actions">
+                    <button class="btn btn--secondary" onclick="wishlistPage.clearFilters()">
+                        <i class="fas fa-times"></i> Temizle
+                    </button>
+                    <button class="btn btn--secondary" onclick="wishlistPage.clearWishlist()">
+                        <i class="fas fa-trash"></i> Listeyi Temizle
+                    </button>
+                </div>
+            </div>
+
+            <!-- Favori Grid -->
+            <div id="wishlistGrid" class="wishlist-grid">
+                <!-- Favori ürünler buraya eklenecek -->
+            </div>
+
+            <!-- Bo Durum -->
+            <div id="emptyWishlist" class="empty-wishlist" style="display: none;">
+                <div class="empty-icon">
+                    <i class="fas fa-heart"></i>
+                </div>
+                <h3>Favori listeniz bo</h3>
+                <p>Beendiiniz ürünleri favorilere ekleyerek burada saklayabilirsiniz</p>
+                <a href="products.html" class="btn btn--primary">
+                    <i class="fas fa-shopping-bag"></i> Ürünlere Göz Atn
+                </a>
+            </div>
+
+            <!-- Toplu lemler -->
+            <div id="bulkActions" class="bulk-actions" style="display: none;">
+                <div class="bulk-actions-content">
+                    <span id="selectedCount">0 ürün seçildi</span>
+                    <div class="bulk-buttons">
+                        <button class="btn btn--primary" onclick="wishlistPage.addSelectedToCart()">
+                            <i class="fas fa-cart-plus"></i> Sepete Ekle
+                        </button>
+                        <button class="btn btn--secondary" onclick="wishlistPage.removeSelected()">
+                            <i class="fas fa-trash"></i> Seçilenleri Kaldr
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div id="footer"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script src="../js/utils/data-manager.js"></script>
+    <script src="../js/utils/cart-manager.js"></script>
+    <script src="../js/components/header.js"></script>
+    <script src="../js/components/footer.js"></script>
+    <script src="../js/wishlist.js"></script>
+</body>
+</html>

@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Siparilerim - Emir Tuning Garage</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/orders.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+</head>
+<body>
+    <div id="header"></div>
+    
+    <main class="orders-page">
+        <div class="container" style="padding-top: 100px;">
+            <div class="page-header">
+                <h1 class="section__title">SPARLERM</h1>
+                <p class="page-subtitle">Tüm siparilerinizi buradan takip edebilirsiniz</p>
+            </div>
+
+            <!-- Müteri Paneli -->
+            <div class="customer-panel">
+                <div class="panel-header">
+                    <div class="customer-welcome">
+                        <div class="welcome-icon">
+                            <i class="fas fa-user-circle"></i>
+                        </div>
+                        <div class="welcome-text">
+                            <h3 id="customerName">Misafir Müteri</h3>
+                            <p>Sipari geçmiiniz ve istatistikleriniz</p>
+                        </div>
+                    </div>
+                    <button class="btn btn--outline" onclick="ordersPage.switchCustomer()">
+                        <i class="fas fa-sync"></i> Müteri Deitir
+                    </button>
+                </div>
+
+                <!-- Müteri statistikleri -->
+                <div class="customer-stats">
+                    <div class="stat-card">
+                        <div class="stat-icon total">
+                            <i class="fas fa-shopping-bag"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h4 id="totalOrders">0</h4>
+                            <p>Toplam Sipari</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon pending">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h4 id="pendingOrders">0</h4>
+                            <p>Bekleyen Sipari</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon delivered">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h4 id="deliveredOrders">0</h4>
+                            <p>Teslim Edilen</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon revenue">
+                            <i class="fas fa-coins"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h4 id="totalSpent">0</h4>
+                            <p>Toplam Harcama</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sipari Filtreleri ve Arama -->
+            <div class="orders-controls">
+                <div class="controls-left">
+                    <div class="search-box">
+                        <i class="fas fa-search"></i>
+                        <input type="text" id="ordersSearch" placeholder="Sipari numaras veya ürün ad ara...">
+                    </div>
+                    
+                    <div class="filter-group">
+                        <select id="statusFilter" class="filter-select">
+                            <option value="">Tüm Durumlar</option>
+                            <option value="pending">Beklemede</option>
+                            <option value="confirmed">Onayland</option>
+                            <option value="preparing">Hazrlanyor</option>
+                            <option value="ready">Hazr</option>
+                            <option value="shipped">Kargoda</option>
+                            <option value="delivered">Teslim Edildi</option>
+                            <option value="cancelled">ptal Edildi</option>
+                        </select>
+                    </div>
+
+                    <div class="filter-group">
+                        <select id="dateFilter" class="filter-select">
+                            <option value="">Tüm Zamanlar</option>
+                            <option value="today">Bugün</option>
+                            <option value="week">Bu Hafta</option>
+                            <option value="month">Bu Ay</option>
+                            <option value="3months">Son 3 Ay</option>
+                            <option value="year">Bu Yl</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="controls-right">
+                    <button class="btn btn--secondary" onclick="ordersPage.clearFilters()">
+                        <i class="fas fa-times"></i> Temizle
+                    </button>
+                    <button class="btn btn--primary" onclick="ordersPage.exportOrders()">
+                        <i class="fas fa-download"></i> Da Aktar
+                    </button>
+                </div>
+            </div>
+
+            <!-- Sipari Listesi -->
+            <div class="orders-container">
+                <div id="ordersList" class="orders-list">
+                    <!-- Sipariler buraya eklenecek -->
+                </div>
+
+                <!-- Bo Durum -->
+                <div id="emptyOrders" class="empty-orders" style="display: none;">
+                    <div class="empty-icon">
+                        <i class="fas fa-shopping-bag"></i>
+                    </div>
+                    <h3>Henüz sipariiniz bulunmuyor</h3>
+                    <p>lk sipariinizi vererek alverie balayn</p>
+                    <a href="products.html" class="btn btn--primary">
+                        <i class="fas fa-shopping-cart"></i> Alverie Bala
+                    </a>
+                </div>
+
+                <!-- Yükleme Durumu -->
+                <div id="loadingOrders" class="loading-orders" style="display: none;">
+                    <div class="loading-spinner"></div>
+                    <p>Sipariler yükleniyor...</p>
+                </div>
+            </div>
+
+            <!-- Sayfalama -->
+            <div id="pagination" class="pagination" style="display: none;">
+                <!-- Sayfalama kontrolleri buraya eklenecek -->
+            </div>
+        </div>
+    </main>
+
+    <!-- Sipari Detay Modal -->
+    <div id="orderDetailModal" class="modal">
+        <div class="modal-content large">
+            <div class="modal-header">
+                <h3 id="modalOrderTitle">Sipari Detaylar</h3>
+                <span class="close" onclick="ordersPage.closeOrderModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div id="orderDetailContent">
+                    <!-- Sipari detaylar buraya eklenecek -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Müteri Seçim Modal -->
+    <div id="customerModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Müteri Seçin</h3>
+                <span class="close" onclick="ordersPage.closeCustomerModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="customer-selection">
+                    <h4>Demo Müteriler</h4>
+                    <p>Farkl sipari durumlarn görmek için müteri deitirebilirsiniz</p>
+                    
+                    <div class="customer-list">
+                        <div class="customer-option" onclick="ordersPage.selectCustomer('ahmet@example.com')">
+                            <div class="customer-avatar">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <div class="customer-info">
+                                <strong>Ahmet Ylmaz</strong>
+                                <span>ahmet@example.com</span>
+                                <span class="customer-stats">3 sipari</span>
+                            </div>
+                        </div>
+                        
+                        <div class="customer-option" onclick="ordersPage.selectCustomer('mehmet@example.com')">
+                            <div class="customer-avatar">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <div class="customer-info">
+                                <strong>Mehmet Demir</strong>
+                                <span>mehmet@example.com</span>
+                                <span class="customer-stats">2 sipari</span>
+                            </div>
+                        </div>
+                        
+                        <div class="customer-option" onclick="ordersPage.selectCustomer('ayse@example.com')">
+                            <div class="customer-avatar">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <div class="customer-info">
+                                <strong>Aye Kaya</strong>
+                                <span>ayse@example.com</span>
+                                <span class="customer-stats">1 sipari</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="footer"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script src="../js/utils/data-manager.js"></script>
+    <script src="../js/utils/cart-manager.js"></script>
+    <script src="../js/utils/order-api.js"></script>
+    <script src="../js/components/header.js"></script>
+    <script src="../js/components/footer.js"></script>
+    <script src="../js/orders.js"></script>
+</body>
+</html>

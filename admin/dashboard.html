@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Emir Tuning Garage</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/admin.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body class="admin-dashboard-page">
+    <!-- Admin Header -->
+    <header class="admin-header">
+        <div class="admin-nav container">
+            <div class="admin-logo">
+                <a href="../pages/index.html">
+                    <h2>EMR TUNING</h2>
+                    <span>ADMIN</span>
+                </a>
+            </div>
+            
+            <div class="admin-user">
+                <span id="adminUsername">Admin</span>
+                <div class="user-dropdown">
+                    <button class="user-btn">
+                        <i class="fas fa-user-circle"></i>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="dropdown-menu">
+                        <a href="#" onclick="adminAuth.logout()"><i class="fas fa-sign-out-alt"></i> Çk Yap</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Admin Sidebar -->
+    <div class="admin-container">
+        <nav class="admin-sidebar">
+            <ul class="sidebar-menu">
+                <li class="menu-item active">
+                    <a href="#dashboard" data-tab="dashboard">
+                        <i class="fas fa-tachometer-alt"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="#products" data-tab="products">
+                        <i class="fas fa-box"></i>
+                        <span>Ürün Yönetimi</span>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="#categories" data-tab="categories">
+                        <i class="fas fa-tags"></i>
+                        <span>Kategori Yönetimi</span>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="#orders" data-tab="orders">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span>Sipariler</span>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="#settings" data-tab="settings">
+                        <i class="fas fa-cogs"></i>
+                        <span>Ayarlar</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="admin-main">
+            <!-- Dashboard Tab -->
+            <div id="dashboard" class="admin-tab active">
+                <div class="tab-header">
+                    <h1>Dashboard</h1>
+                    <p>Sistem istatistikleri ve genel bak</p>
+                </div>
+
+                <!-- statistik Kartlar -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-box"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="totalProducts">0</h3>
+                            <p>Toplam Ürün</p>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-tags"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="totalCategories">0</h3>
+                            <p>Toplam Kategori</p>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="featuredProducts">0</h3>
+                            <p>Öne Çkan Ürün</p>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-times-circle"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="outOfStock">0</h3>
+                            <p>Stokta Yok</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hzl lemler -->
+                <div class="quick-actions">
+                    <h2>Hzl lemler</h2>
+                    <div class="actions-grid">
+                        <button class="action-card" onclick="adminUI.showTab('products')">
+                            <i class="fas fa-plus"></i>
+                            <span>Yeni Ürün Ekle</span>
+                        </button>
+                        <button class="action-card" onclick="adminUI.showTab('categories')">
+                            <i class="fas fa-tags"></i>
+                            <span>Kategori Ekle</span>
+                        </button>
+                        <button class="action-card" onclick="adminData.exportData()">
+                            <i class="fas fa-download"></i>
+                            <span>Veri Yedekle</span>
+                        </button>
+                        <button class="action-card" onclick="adminData.importData()">
+                            <i class="fas fa-upload"></i>
+                            <span>Veri Geri Yükle</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Son Eklenen Ürünler -->
+                <div class="recent-products">
+                    <h2>Son Eklenen Ürünler</h2>
+                    <div id="recentProductsList" class="recent-list">
+                        <!-- Son ürünler buraya eklenecek -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ürün Yönetimi Tab -->
+            <div id="products" class="admin-tab">
+                <div class="tab-header">
+                    <h1>Ürün Yönetimi</h1>
+                    <button class="btn btn--primary" onclick="adminProducts.openProductModal()">
+                        <i class="fas fa-plus"></i> Yeni Ürün Ekle
+                    </button>
+                </div>
+
+                <!-- Ürün Filtreleri -->
+                <div class="admin-filters">
+                    <div class="filter-row">
+                        <input type="text" id="productSearch" placeholder="Ürün ara..." class="search-input">
+                        <select id="productCategoryFilter" class="filter-select">
+                            <option value="">Tüm Kategoriler</option>
+                        </select>
+                        <select id="productStockFilter" class="filter-select">
+                            <option value="">Tüm Stok Durumu</option>
+                            <option value="inStock">Stokta</option>
+                            <option value="outOfStock">Stokta Yok</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Ürün Tablosu -->
+                <div class="admin-table-container">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Ürün Ad</th>
+                                <th>Kategori</th>
+                                <th>Marka</th>
+                                <th>Fiyat</th>
+                                <th>Stok</th>
+                                <th>lemler</th>
+                            </tr>
+                        </thead>
+                        <tbody id="productsTable">
+                            <!-- Ürünler buraya eklenecek -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Kategori Yönetimi Tab -->
+            <div id="categories" class="admin-tab">
+                <div class="tab-header">
+                    <h1>Kategori Yönetimi</h1>
+                    <button class="btn btn--primary" onclick="adminCategories.openCategoryModal()">
+                        <i class="fas fa-plus"></i> Yeni Kategori Ekle
+                    </button>
+                </div>
+
+                <div id="categoriesList" class="categories-grid">
+                    <!-- Kategoriler buraya eklenecek -->
+                </div>
+            </div>
+
+            <!-- Sipariler Tab -->
+            <div id="orders" class="admin-tab">
+                <div class="tab-header">
+                    <h1>Sipari Yönetimi</h1>
+                    <p>Sipari yönetimi yaknda eklenecek...</p>
+                </div>
+            </div>
+
+            <!-- Ayarlar Tab -->
+            <div id="settings" class="admin-tab">
+                <div class="tab-header">
+                    <h1>Sistem Ayarlar</h1>
+                </div>
+
+                <div class="settings-grid">
+                    <div class="setting-card">
+                        <h3>Veri Yönetimi</h3>
+                        <div class="setting-actions">
+                            <button class="btn btn--primary" onclick="adminData.exportData()">
+                                <i class="fas fa-download"></i> Verileri Da Aktar
+                            </button>
+                            <button class="btn btn--secondary" onclick="adminData.importData()">
+                                <i class="fas fa-upload"></i> Verileri çe Aktar
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="setting-card">
+                        <h3>Veritaban lemleri</h3>
+                        <div class="setting-actions">
+                            <button class="btn btn--secondary" onclick="adminData.resetData()">
+                                <i class="fas fa-trash"></i> Verileri Sfrla
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Ürün Ekleme/Düzenleme Modal -->
+    <div id="productModal" class="admin-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="productModalTitle">Yeni Ürün Ekle</h3>
+                <span class="close" onclick="adminProducts.closeModal()">&times;</span>
+            </div>
+            <form id="productForm" class="modal-form">
+                <input type="hidden" id="productId">
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Ürün Ad *</label>
+                        <input type="text" id="productName" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Fiyat () *</label>
+                        <input type="number" id="productPrice" required min="0" step="1">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Kategori *</label>
+                        <select id="productCategory" required>
+                            <option value="">Seçiniz</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Alt Kategori *</label>
+                        <select id="productSubcategory" required>
+                            <option value="">Seçiniz</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Marka *</label>
+                        <select id="productBrand" required>
+                            <option value="">Seçiniz</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Model *</label>
+                        <input type="text" id="productModel" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Yl *</label>
+                        <input type="text" id="productYear" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Açklama *</label>
+                    <textarea id="productDescription" rows="3" required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>Özellikler (virgülle ayrn) *</label>
+                    <input type="text" id="productFeatures" placeholder="4K Kayt, Gece Görü, Wi-Fi" required>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Görsel (Emoji)</label>
+                        <input type="text" id="productImage" placeholder="">
+                    </div>
+                    <div class="form-group">
+                        <label>Stok Durumu</label>
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="productInStock">
+                            <label for="productInStock">Stokta</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Öne Çkan</label>
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="productFeatured">
+                            <label for="productFeatured">Öne Çkan Ürün</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="button" class="btn btn--secondary" onclick="adminProducts.closeModal()">ptal</button>
+                    <button type="submit" class="btn btn--primary">Kaydet</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Kategori Ekleme Modal -->
+    <div id="categoryModal" class="admin-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Yeni Kategori Ekle</h3>
+                <span class="close" onclick="adminCategories.closeModal()">&times;</span>
+            </div>
+            <form id="categoryForm" class="modal-form">
+                <input type="hidden" id="categoryId">
+                
+                <div class="form-group">
+                    <label>Kategori Ad *</label>
+                    <input type="text" id="categoryName" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Alt Kategoriler (her satra bir tane) *</label>
+                    <textarea id="categorySubcategories" rows="4" placeholder="Seramik Kaplama&#10;Cam Filmi&#10;Boya Koruma" required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>kon (Font Awesome class)</label>
+                    <input type="text" id="categoryIcon" placeholder="fas fa-car">
+                </div>
+
+                <div class="form-actions">
+                    <button type="button" class="btn btn--secondary" onclick="adminCategories.closeModal()">ptal</button>
+                    <button type="submit" class="btn btn--primary">Kaydet</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="../js/utils/data-manager.js"></script>
+    <script src="../js/admin-auth.js"></script>
+    <script src="../js/admin-ui.js"></script>
+    <script src="../js/admin-products.js"></script>
+    <script src="../js/admin-categories.js"></script>
+    <script src="../js/admin-data.js"></script>
+    <script src="../js/admin-main.js"></script>
+</body>
+</html>

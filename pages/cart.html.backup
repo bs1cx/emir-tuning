@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sepetim - Emir Tuning Garage</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/cart.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+</head>
+<body>
+    <div id="header"></div>
+    
+    <main class="cart-page">
+        <div class="container" style="padding-top: 100px;">
+            <div class="page-header">
+                <h1 class="section__title">SEPETM</h1>
+                <p class="page-subtitle">Sipariinizi gözden geçirin</p>
+            </div>
+
+            <div class="cart-layout">
+                <!-- Sepet çerii -->
+                <div class="cart-content">
+                    <div class="cart-header">
+                        <h2>Sepet Ürünleri</h2>
+                        <span class="items-count" id="cartItemsCount">0 ürün</span>
+                    </div>
+
+                    <div id="cartItems" class="cart-items">
+                        <!-- Sepet ürünleri buraya eklenecek -->
+                    </div>
+
+                    <!-- Bo Sepet -->
+                    <div id="emptyCart" class="empty-cart" style="display: none;">
+                        <div class="empty-cart-icon">
+                            <i class="fas fa-shopping-cart"></i>
+                        </div>
+                        <h3>Sepetiniz bo</h3>
+                        <p>Henüz sepete ürün eklemediniz</p>
+                        <a href="products.html" class="btn btn--primary">
+                            <i class="fas fa-shopping-bag"></i> Alverie Bala
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Sipari Özeti -->
+                <div class="cart-sidebar">
+                    <div class="order-summary">
+                        <h3>Sipari Özeti</h3>
+                        
+                        <div class="summary-row">
+                            <span>Ara Toplam:</span>
+                            <span id="subtotal">0</span>
+                        </div>
+                        
+                        <div class="summary-row">
+                            <span>Kargo:</span>
+                            <span id="shipping">0</span>
+                        </div>
+                        
+                        <div class="summary-row">
+                            <span>KDV (%18):</span>
+                            <span id="tax">0</span>
+                        </div>
+                        
+                        <div class="summary-row total">
+                            <strong>Toplam:</strong>
+                            <strong id="total">0</strong>
+                        </div>
+
+                        <div class="shipping-notice">
+                            <i class="fas fa-truck"></i>
+                            <span>Ücretsiz kargo 500 ve üzeri siparilerde</span>
+                        </div>
+
+                        <button id="checkoutBtn" class="btn btn--primary btn--block" disabled>
+                            <i class="fas fa-lock"></i> Güvenli Ödeme
+                        </button>
+
+                        <div class="trust-badges">
+                            <div class="trust-badge">
+                                <i class="fas fa-shield-alt"></i>
+                                <span>Güvenli Ödeme</span>
+                            </div>
+                            <div class="trust-badge">
+                                <i class="fas fa-undo"></i>
+                                <span>Kolay ade</span>
+                            </div>
+                            <div class="trust-badge">
+                                <i class="fas fa-headset"></i>
+                                <span>7/24 Destek</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Hzl lemler -->
+                    <div class="quick-actions">
+                        <h4>Hzl lemler</h4>
+                        <button class="btn btn--secondary btn--block" onclick="cartPage.clearCart()">
+                            <i class="fas fa-trash"></i> Sepeti Temizle
+                        </button>
+                        <a href="products.html" class="btn btn--outline btn--block">
+                            <i class="fas fa-arrow-left"></i> Alverie Devam Et
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Önerilen Ürünler -->
+            <div class="recommended-products">
+                <h3>Bu Ürünler lginizi Çekebilir</h3>
+                <div id="recommendedProducts" class="products-grid recommended-grid">
+                    <!-- Önerilen ürünler buraya eklenecek -->
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div id="footer"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script src="../js/utils/data-manager.js"></script>
+    <script src="../js/utils/cart-manager.js"></script>
+    <script src="../js/components/header.js"></script>
+    <script src="../js/components/footer.js"></script>
+    <script src="../js/components/cart.js"></script>
+    <script src="../js/cart-page.js"></script>
+</body>
+</html>

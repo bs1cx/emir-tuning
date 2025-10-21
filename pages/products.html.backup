@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ürünler - Emir Tuning Garage</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div id="header"></div>
+    
+    <main class="products-page">
+        <div class="container" style="padding-top: 100px;">
+            <h1 class="section__title">TÜM ÜRÜNLER</h1>
+            
+            <!-- Filtreleme Sistemi -->
+            <div class="filters-section">
+                <div class="filter-grid">
+                    <div class="filter-group">
+                        <label>Kategori</label>
+                        <select id="categoryFilter" class="filter-select">
+                            <option value="">Tüm Kategoriler</option>
+                        </select>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <label>Marka</label>
+                        <select id="brandFilter" class="filter-select">
+                            <option value="">Tüm Markalar</option>
+                        </select>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <label>Model</label>
+                        <select id="modelFilter" class="filter-select">
+                            <option value="">Tüm Modeller</option>
+                        </select>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <label>Yıl</label>
+                        <select id="yearFilter" class="filter-select">
+                            <option value="">Tüm Yıllar</option>
+                        </select>
+                    </div>
+                    
+                    <div class="filter-actions">
+                        <button onclick="productsPage.clearFilters()" class="btn btn--secondary">
+                            <i class="fas fa-times"></i> Temizle
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Arama Çubuğu -->
+            <div class="search-section">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="searchInput" placeholder="Ürün adı, marka veya model ara...">
+                </div>
+            </div>
+
+            <!-- Ürün Grid -->
+            <div class="products-header">
+                <div class="products-count">
+                    <span id="productsCount">0 ürün bulundu</span>
+                </div>
+                <div class="sort-options">
+                    <select id="sortSelect" class="filter-select">
+                        <option value="name">İsme Göre (A-Z)</option>
+                        <option value="name-desc">İsme Göre (Z-A)</option>
+                        <option value="price">Fiyat (Artan)</option>
+                        <option value="price-desc">Fiyat (Azalan)</option>
+                    </select>
+                </div>
+            </div>
+
+            <div id="productsGrid" class="products__grid detailed-grid">
+                <!-- Ürünler buraya eklenecek -->
+            </div>
+
+            <!-- Boş durum -->
+            <div id="emptyState" class="empty-state" style="display: none;">
+                <i class="fas fa-search"></i>
+                <h3>Ürün bulunamadı</h3>
+                <p>Arama kriterlerinize uygun ürün bulunamadı.</p>
+                <button onclick="productsPage.clearFilters()" class="btn btn--primary">Filtreleri Temizle</button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Ürün Detay Modal -->
+    <div id="productModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="productModalTitle">Ürün Detayı</h3>
+                <span class="close" onclick="productsPage.closeModal()">&times;</span>
+            </div>
+            <div class="modal-body" id="productModalBody">
+                <!-- Ürün detayları buraya eklenecek -->
+            </div>
+        </div>
+    </div>
+
+    <div id="footer"></div>
+
+    <script src="../js/utils/data-manager.js"></script>
+    <script src="../js/components/header.js"></script>
+    <script src="../js/components/footer.js"></script>
+    <script src="../js/components/filters.js"></script>
+    <script src="../js/components/product-grid.js"></script>
+    <script src="../js/products.js"></script>
+</body>
+</html>
+EOF

@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - Emir Tuning Garage</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <nav class="nav container">
+            <div class="nav__logo">
+                <h2>EMİR TUNING</h2>
+                <span>ADMIN</span>
+            </div>
+            
+            <ul class="nav__menu">
+                <li><a href="index.html">Siteye Dön</a></li>
+                <li><a href="#products" class="active">Ürün Yönetimi</a></li>
+                <li><a href="#categories">Kategori Yönetimi</a></li>
+                <li><a href="#orders">Siparişler</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="container" style="padding-top: 100px;">
+        <!-- Admin Dashboard -->
+        <div class="admin-dashboard">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h3>Toplam Ürün</h3>
+                    <p id="totalProducts">0</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Toplam Kategori</h3>
+                    <p id="totalCategories">0</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Toplam Marka</h3>
+                    <p id="totalBrands">0</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Ürün Yönetimi -->
+        <section id="products" class="admin-section">
+            <h2 class="section__title">ÜRÜN YÖNETİMİ</h2>
+            
+            <div class="admin-actions">
+                <button class="btn btn--primary" onclick="openProductModal()">
+                    <i class="fas fa-plus"></i> Yeni Ürün Ekle
+                </button>
+                <button class="btn btn--secondary" onclick="exportData()">
+                    <i class="fas fa-download"></i> Verileri Dışa Aktar
+                </button>
+                <button class="btn btn--secondary" onclick="importData()">
+                    <i class="fas fa-upload"></i> Verileri İçe Aktar
+                </button>
+            </div>
+
+            <!-- Ürün Listesi -->
+            <div class="admin-table-container">
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Ürün Adı</th>
+                            <th>Kategori</th>
+                            <th>Marka</th>
+                            <th>Fiyat</th>
+                            <th>İşlemler</th>
+                        </tr>
+                    </thead>
+                    <tbody id="productsTable">
+                        <!-- Ürünler buraya eklenecek -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Kategori Yönetimi -->
+        <section id="categories" class="admin-section">
+            <h2 class="section__title">KATEGORİ YÖNETİMİ</h2>
+            
+            <div class="admin-actions">
+                <button class="btn btn--primary" onclick="openCategoryModal()">
+                    <i class="fas fa-plus"></i> Yeni Kategori Ekle
+                </button>
+            </div>
+
+            <div id="categoriesList" class="categories-admin-list">
+                <!-- Kategoriler buraya eklenecek -->
+            </div>
+        </section>
+    </main>
+
+    <!-- Ürün Ekleme/Düzenleme Modal -->
+    <div id="productModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="productModalTitle">Yeni Ürün Ekle</h3>
+                <span class="close" onclick="closeProductModal()">&times;</span>
+            </div>
+            <form id="productForm" class="modal-form">
+                <input type="hidden" id="productId">
+                
+                <div class="form-group">
+                    <label>Ürün Adı *</label>
+                    <input type="text" id="productName" required>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Kategori *</label>
+                        <select id="productCategory" required>
+                            <option value="">Seçiniz</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Alt Kategori *</label>
+                        <select id="productSubcategory" required>
+                            <option value="">Seçiniz</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Marka *</label>
+                        <select id="productBrand" required>
+                            <option value="">Seçiniz</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Model *</label>
+                        <input type="text" id="productModel" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Yıl *</label>
+                        <input type="text" id="productYear" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Fiyat (₺) *</label>
+                    <input type="number" id="productPrice" required min="0">
+                </div>
+
+                <div class="form-group">
+                    <label>Açıklama *</label>
+                    <textarea id="productDescription" rows="3" required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>Özellikler (virgülle ayırın) *</label>
+                    <input type="text" id="productFeatures" placeholder="4K Kayıt, Gece Görüş, Wi-Fi" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Görsel (Emoji) *</label>
+                    <input type="text" id="productImage" placeholder="📷" required>
+                </div>
+
+                <div class="form-actions">
+                    <button type="button" class="btn btn--secondary" onclick="closeProductModal()">İptal</button>
+                    <button type="submit" class="btn btn--primary">Kaydet</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Kategori Ekleme Modal -->
+    <div id="categoryModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Yeni Kategori Ekle</h3>
+                <span class="close" onclick="closeCategoryModal()">&times;</span>
+            </div>
+            <form id="categoryForm" class="modal-form">
+                <div class="form-group">
+                    <label>Kategori Adı *</label>
+                    <input type="text" id="categoryName" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Alt Kategoriler (her satıra bir tane) *</label>
+                    <textarea id="categorySubcategories" rows="4" placeholder="Seramik Kaplama&#10;Cam Filmi&#10;Boya Koruma" required></textarea>
+                </div>
+
+                <div class="form-actions">
+                    <button type="button" class="btn btn--secondary" onclick="closeCategoryModal()">İptal</button>
+                    <button type="submit" class="btn btn--primary">Kaydet</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Emir Tuning Garage - Admin Panel</p>
+        </div>
+    </footer>
+
+    <script src="data.js"></script>
+    <script src="admin.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

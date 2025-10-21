@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sipari Takip - Emir Tuning Garage</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/order-tracking.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+</head>
+<body>
+    <div id="header"></div>
+    
+    <main class="order-tracking-page">
+        <div class="container" style="padding-top: 100px;">
+            <div class="page-header">
+                <h1 class="section__title">SPAR TAKP</h1>
+                <p class="page-subtitle">Sipariinizin durumunu anlk takip edin</p>
+            </div>
+
+            <!-- Sipari Ara -->
+            <div class="tracking-search-section">
+                <div class="search-card">
+                    <div class="search-header">
+                        <i class="fas fa-search-location"></i>
+                        <h3>Sipari Numaranz Girin</h3>
+                        <p>Sipari onay mailinizdeki sipari numaras ile takip yapabilirsiniz</p>
+                    </div>
+                    
+                    <form id="trackingForm" class="tracking-form">
+                        <div class="input-group">
+                            <input type="text" 
+                                   id="orderNumber" 
+                                   placeholder="Örn: EMT12345678" 
+                                   required
+                                   pattern="[A-Z0-9]{8,12}"
+                                   title="Sipari numaranz girin (EMT12345678 formatnda)">
+                            <button type="submit" class="btn btn--primary">
+                                <i class="fas fa-search"></i> Siparii Bul
+                            </button>
+                        </div>
+                    </form>
+
+                    <div class="search-examples">
+                        <h4>Örnek Sipari Numaralar (Demo):</h4>
+                        <div class="example-numbers">
+                            <span class="example-number" onclick="orderTracking.fillExample('EMT2024123A')">EMT2024123A</span>
+                            <span class="example-number" onclick="orderTracking.fillExample('EMT2024123B')">EMT2024123B</span>
+                            <span class="example-number" onclick="orderTracking.fillExample('EMT2024123C')">EMT2024123C</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sipari Detaylar -->
+            <div id="orderDetails" class="order-details" style="display: none;">
+                <!-- Sipari bilgileri buraya eklenecek -->
+            </div>
+
+            <!-- Demo Sipariler -->
+            <div class="demo-orders">
+                <h3>Demo Sipariler</h3>
+                <p>Aadaki demo siparileri inceleyebilirsiniz:</p>
+                
+                <div class="demo-cards">
+                    <div class="demo-card" onclick="orderTracking.trackOrder('EMT2024123A')">
+                        <div class="demo-status preparing">
+                            <i class="fas fa-box"></i>
+                            <span>Hazrlanyor</span>
+                        </div>
+                        <div class="demo-info">
+                            <strong>EMT2024123A</strong>
+                            <span>4K Dash Kamera + Multimedya Seti</span>
+                            <span class="demo-date">12 Ara 2024</span>
+                        </div>
+                    </div>
+                    
+                    <div class="demo-card" onclick="orderTracking.trackOrder('EMT2024123B')">
+                        <div class="demo-status shipped">
+                            <i class="fas fa-shipping-fast"></i>
+                            <span>Kargoda</span>
+                        </div>
+                        <div class="demo-info">
+                            <strong>EMT2024123B</strong>
+                            <span>Seramik Kaplama + LED Far Seti</span>
+                            <span class="demo-date">10 Ara 2024</span>
+                        </div>
+                    </div>
+                    
+                    <div class="demo-card" onclick="orderTracking.trackOrder('EMT2024123C')">
+                        <div class="demo-status delivered">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Teslim Edildi</span>
+                        </div>
+                        <div class="demo-info">
+                            <strong>EMT2024123C</strong>
+                            <span>Ses Sistemi + Subwoofer</span>
+                            <span class="demo-date">05 Ara 2024</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Skça Sorulan Sorular -->
+            <div class="faq-section">
+                <h3>Skça Sorulan Sorular</h3>
+                <div class="faq-grid">
+                    <div class="faq-item">
+                        <h4>Sipari numaram nereden bulabilirim?</h4>
+                        <p>Sipari onay e-postanzda ve SMS'inizde sipari numaranz bulunmaktadr.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h4>Sipariim ne zaman teslim edilir?</h4>
+                        <p>Sipariler genellikle 3-5 i günü içinde teslim edilir. Detayl bilgi için takip sistemimizi kullanabilirsiniz.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h4>Sipariimi nasl iptal edebilirim?</h4>
+                        <p>Sipariiniz hazrlanma aamasndaysa 0555 123 45 67 numaral hattmzdan iptal talebinde bulunabilirsiniz.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Bildirimler Modal -->
+    <div id="notificationsModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Sipari Bildirimleri</h3>
+                <span class="close" onclick="orderTracking.closeNotifications()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div id="notificationsList" class="notifications-list">
+                    <!-- Bildirimler buraya eklenecek -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="footer"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script src="../js/utils/data-manager.js"></script>
+    <script src="../js/utils/cart-manager.js"></script>
+    <script src="../js/utils/order-api.js"></script>
+    <script src="../js/components/header.js"></script>
+    <script src="../js/components/footer.js"></script>
+    <script src="../js/order-tracking.js"></script>
+</body>
+</html>

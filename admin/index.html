@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Giri - Emir Tuning Garage</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/admin.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body class="admin-login-page">
+    <div class="login-container">
+        <div class="login-card">
+            <div class="login-header">
+                <div class="logo">
+                    <h2>EMR TUNING</h2>
+                    <span>ADMIN PANEL</span>
+                </div>
+                <p>Sisteme erimek için giri yapn</p>
+            </div>
+
+            <form id="loginForm" class="login-form">
+                <div class="form-group">
+                    <label for="username">Kullanc Ad</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-user"></i>
+                        <input type="text" id="username" name="username" required placeholder="admin">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">ifre</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="password" name="password" required placeholder="">
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn--primary btn--block">
+                    <i class="fas fa-sign-in-alt"></i> Giri Yap
+                </button>
+            </form>
+
+            <div class="login-footer">
+                <p>Varsaylan bilgiler: <strong>admin</strong> / <strong>admin123</strong></p>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/utils/data-manager.js"></script>
+    <script src="../js/admin-auth.js"></script>
+</body>
+</html>

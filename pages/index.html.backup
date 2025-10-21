@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emir Tuning Garage - Profesyonel Araç Tuning</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav container">
+            <div class="nav__logo">
+                <h2>EMİR TUNING</h2>
+                <span>GARAGE</span>
+            </div>
+            
+            <ul class="nav__menu">
+                <li><a href="#home" class="active">Ana Sayfa</a></li>
+                <li><a href="#services">Hizmetler</a></li>
+                <li><a href="#products">Ürünler</a></li>
+                <li><a href="#gallery">Galeri</a></li>
+                <li><a href="#contact">İletişim</a></li>
+            </ul>
+            
+            <div class="nav__toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero__content">
+            <h1 class="hero__title">EMİR TUNING GARAGE</h1>
+            <p class="hero__subtitle">Aracınızı Hayal Ettiğiniz Hale Getiriyoruz</p>
+            <div class="hero__buttons">
+                <a href="#services" class="btn btn--primary">Hizmetlerimiz</a>
+                <a href="#contact" class="btn btn--secondary">Hemen İletişime Geçin</a>
+            </div>
+        </div>
+        <div class="hero__image">
+            <div class="car-placeholder">
+                <i class="fas fa-car-side"></i>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services">
+        <div class="container">
+            <h2 class="section__title">HİZMETLERİMİZ</h2>
+            <div class="services__grid">
+                <div class="service__card">
+                    <i class="fas fa-film"></i>
+                    <h3>Araç Kaplama & Cam Filmi</h3>
+                    <p>Profesyonel araç kaplama ve cam filmi uygulamaları</p>
+                </div>
+                
+                <div class="service__card">
+                    <i class="fas fa-camera"></i>
+                    <h3>Araç Kayıt Kameraları</h3>
+                    <p>Yüksek kaliteli kayıt sistemleri</p>
+                </div>
+                
+                <div class="service__card">
+                    <i class="fas fa-tv"></i>
+                    <h3>Multimedya Sistemleri</h3>
+                    <p>En son teknoloji multimedya çözümleri</p>
+                </div>
+                
+                <div class="service__card">
+                    <i class="fas fa-volume-up"></i>
+                    <h3>Ses Sistemleri</h3>
+                    <p>Premium ses sistemi kurulumları</p>
+                </div>
+                
+                <div class="service__card">
+                    <i class="fas fa-lightbulb"></i>
+                    <h3>Aydınlatma</h3>
+                    <p>LED aydınlatma ve far sistemleri</p>
+                </div>
+                
+                <div class="service__card">
+                    <i class="fas fa-spray-can"></i>
+                    <h3>Temizlik & Bakım</h3>
+                    <p>Detaylı temizlik ve koruma hizmetleri</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Preview -->
+    <section id="products" class="products">
+        <div class="container">
+            <h2 class="section__title">POPÜLER ÜRÜNLER</h2>
+            <div class="products__grid">
+                <div class="product__card">
+                    <div class="product__image">
+                        <i class="fas fa-camera"></i>
+                    </div>
+                    <h3>4K Dash Kamera</h3>
+                    <p class="product__price">₺1.299</p>
+                    <button class="btn btn--small">Detaylı İncele</button>
+                </div>
+                
+                <div class="product__card">
+                    <div class="product__image">
+                        <i class="fas fa-tv"></i>
+                    </div>
+                    <h3>Android Multimedya</h3>
+                    <p class="product__price">₺3.499</p>
+                    <button class="btn btn--small">Detaylı İncele</button>
+                </div>
+                
+                <div class="product__card">
+                    <div class="product__image">
+                        <i class="fas fa-volume-up"></i>
+                    </div>
+                    <h3>Subwoofer Set</h3>
+                    <p class="product__price">₺2.199</p>
+                    <button class="btn btn--small">Detaylı İncele</button>
+                </div>
+            </div>
+            <div class="text-center">
+                <a href="products.html" class="btn btn--primary">Tüm Ürünleri Gör</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section__title">İLETİŞİM</h2>
+            <div class="contact__grid">
+                <div class="contact__info">
+                    <div class="contact__item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <h3>Adres</h3>
+                            <p>İstanbul, Türkiye</p>
+                        </div>
+                    </div>
+                    <div class="contact__item">
+                        <i class="fas fa-phone"></i>
+                        <div>
+                            <h3>Telefon</h3>
+                            <p>+90 555 123 45 67</p>
+                        </div>
+                    </div>
+                    <div class="contact__item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <h3>E-posta</h3>
+                            <p>info@emirtuning.com</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <form class="contact__form">
+                    <input type="text" placeholder="Adınız" required>
+                    <input type="email" placeholder="E-posta" required>
+                    <input type="tel" placeholder="Telefon">
+                    <textarea placeholder="Mesajınız" rows="5" required></textarea>
+                    <button type="submit" class="btn btn--primary">Gönder</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Emir Tuning Garage. Tüm hakları saklıdır.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
